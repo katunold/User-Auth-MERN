@@ -1,27 +1,29 @@
-import mongoose from 'mongoose';
+const mongoose = require('mongoose');
+const crypto = require('crypto');
 
 const userSchema = new mongoose.Schema({
-    name: {
-        type: String,
-        trim: true,
-        required: 'Name is required'
-    },
-    email: {
-        type: String,
-        trim: true,
-        required: 'Email is required'
-    },
-    created: {
-        type: Date,
-        default: Date.now()
-    },
-    updated: Date,
-    hashed_password: {
-        type: String,
-        required: 'Password is required'
-    },
-    salt: String
-});
+      name: {
+          type: String,
+          trim: true,
+          required: 'Name is required'
+      },
+      email: {
+          type: String,
+          trim: true,
+          unique: 'Email already exists',
+          match: [/.+@.+\..+/, 'Please insert a valid email format'],
+          required: 'Email is required'
+      },
+      hashed_password: {
+          type: String,
+          required: 'Password is required'
+      },
+      salt: String
+  },
+  {
+      timestamps: true
+  }
+);
 
 userSchema
     .virtual('password')
@@ -34,7 +36,7 @@ userSchema
        return this._password;
     });
 
-userSchema.path('hash_password').validate(function (v) {
+userSchema.path('hashed_password').validate(function () {
     if (this._password && this._password.length < 6) {
         this.invalidate('password', 'Password must be at least 6 characters.')
     }
@@ -61,6 +63,6 @@ userSchema.methods = {
     makeSalt: function() {
         return Math.round((new Date().valueOf() * Math.random())) + ''
     }
-}
+};
 
-export default mongoose.model('User', userSchema);
+module.exports = mongoose.model('User', userSchema);

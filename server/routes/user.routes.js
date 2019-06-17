@@ -1,5 +1,5 @@
-import express from 'express';
-import userCtrl from '../controllers/user.controller';
+const express = require('express');
+const userCtrl = require('../controllers/user.controller');
 
 const router = express.Router();
 
@@ -14,4 +14,4 @@ router.route('/api/users/:userId')
 
 router.param('userId', userCtrl.userByID);
 
-export default router;
+module.exports = router;
