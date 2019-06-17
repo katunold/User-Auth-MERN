@@ -7,4 +7,4 @@ const config = {
         'mongodb://' + (process.env.IP || 'localhost') + ':' + (process.env.MONGO_PORT || '27017') + '/user-auth-mern'
 };
 
-export default config;
+module.exports = config;

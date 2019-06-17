@@ -1,13 +1,20 @@
-import app from './express';
-import config from '../config/config';
-import mongoose from 'mongoose';
+const app = require('./express');
+const config = require('../config/config');
+const mongoose = require('mongoose');
+const userRoutes = require('./routes/user.routes');
 
 // Connection URL
 mongoose.Promise = global.Promise;
-mongoose.connect(config.mongoUri);
-mongoose.connection.on('error', () => {
-    throw new Error(`Unable to connect to database : ${config.mongoUri}`)
-});
+mongoose.connect(config.mongoUri, { useNewUrlParser: true })
+  .then(() => {
+      console.log("Successfully connected to the database");
+  })
+  .catch((err) => {
+      console.log("Could not connect to the database. Exiting now...", err);
+      process.exit();
+  });
+
+app.use('/', userRoutes);
 
 app.listen(config.port, (err) => {
     if (err) {
