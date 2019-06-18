@@ -2,6 +2,7 @@ const app = require('./express');
 const config = require('../config/config');
 const mongoose = require('mongoose');
 const userRoutes = require('./routes/user.routes');
+const authRoutes = require('./routes/auth.routes');
 
 // Connection URL
 mongoose.Promise = global.Promise;
@@ -15,6 +16,14 @@ mongoose.connect(config.mongoUri, { useNewUrlParser: true })
   });
 
 app.use('/', userRoutes);
+app.use('/', authRoutes);
+app.use((err, req, res, next) => {
+  if (err.name === 'UnauthorizedError') {
+    res.status(401).send({error : `${err.name} :  ${err.message}`})
+  }
+  next();
+});
+
 
 app.listen(config.port, (err) => {
     if (err) {
