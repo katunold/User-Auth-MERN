@@ -1,7 +1,6 @@
 const User = require('../models/user.model');
 const _  = require('lodash');
 const errorHandler = require('./../helpers/dbErrorHandler');
-
 /**
  * method to create a new user account
  */
@@ -51,7 +50,6 @@ const userByID = (req, res, next, id) => {
     next();
   })
 };
-
 /**
  * Function to return a single user profile
  */
@@ -86,7 +84,6 @@ const update = (req, res) => {
     res.status(200).json(userUpdate);
   })
 };
-
 /**
  * Delete user account
  */
@@ -98,7 +95,6 @@ const remove = (req, res) => {
         error: errorHandler.getErrorMessage(err)
       })
     }
-
     res.status(204);
   })
 };

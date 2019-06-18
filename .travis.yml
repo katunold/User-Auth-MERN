@@ -1,0 +1,6 @@
+language: node_js
+node_js:
+  - "stable"
+services: mongodb
+script:
+  - nyc mocha  "test/**/*.test.js"
