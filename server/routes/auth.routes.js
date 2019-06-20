@@ -7,6 +7,6 @@ authRouter.route('/auth/signIn')
   .post(authController.signIn);
 
 authRouter.route('/auth/logout')
-  .get(authController.logout);
+  .post(authController.logout);
 
 module.exports = authRouter;

@@ -10,7 +10,7 @@ const create = (req, res) => {
     if (err) {
       return res.status(400).json({error: errorHandler.getErrorMessage(err)});
     }
-    res.status(200).json({
+    res.status(201).json({
       message: 'Successfully signed up'
     })
   });
@@ -95,7 +95,7 @@ const remove = (req, res) => {
         error: errorHandler.getErrorMessage(err)
       })
     }
-    res.status(204);
+    res.status(204).json();
   })
 };
 

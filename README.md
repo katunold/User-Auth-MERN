@@ -1,2 +1,2 @@
-# User-Auth-MERN
+# User-Auth-MERN [![Build Status](https://travis-ci.org/katunold/User-Auth-MERN.svg?branch=story%2Ftests)](https://travis-ci.org/katunold/User-Auth-MERN) [![Maintainability](https://api.codeclimate.com/v1/badges/eb000bd03c0c24b9786e/maintainability)](https://codeclimate.com/github/katunold/User-Auth-MERN/maintainability)
 A skeleton application that encapsulates rudimentary features and a workflow repeated by most MERN applications

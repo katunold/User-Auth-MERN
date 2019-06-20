@@ -6,7 +6,7 @@ const authRoutes = require('./routes/auth.routes');
 
 // Connection URL
 mongoose.Promise = global.Promise;
-mongoose.connect(config.mongoLink(), { useNewUrlParser: true })
+mongoose.connect(config.mongoLink(), { useNewUrlParser: true, useCreateIndex: true })
   .then(() => {
       console.log("Successfully connected to the database");
   })
