@@ -6,7 +6,7 @@ const authRoutes = require('./routes/auth.routes');
 
 // Connection URL
 mongoose.Promise = global.Promise;
-mongoose.connect(config.mongoUri, { useNewUrlParser: true })
+mongoose.connect(config.mongoLink(), { useNewUrlParser: true, useCreateIndex: true })
   .then(() => {
       console.log("Successfully connected to the database");
   })
@@ -25,9 +25,11 @@ app.use((err, req, res, next) => {
 });
 
 
-app.listen(config.port, (err) => {
+app.server = app.listen(config.port, (err) => {
     if (err) {
         console.log(err);
     }
     console.info(`Server started on port ${config.port}`);
 });
+
+module.exports = app;
